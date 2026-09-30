@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About — Manchester Is Red</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --abyss: #120203;
+    --oxblood: #2a0507;
+    --blood: #5c0a0e;
+    --devil: #b3121b;
+    --ember: #c01a1f;
+    --ash: #c9a9a6;
+    --line: rgba(179, 18, 27, .35);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
+    background: radial-gradient(ellipse 90% 50% at 50% 0%, var(--blood) 0%, var(--oxblood) 45%, var(--abyss) 100%) fixed;
+    background-color: var(--abyss);
+    color: var(--ash);
+    font-family: "Inter", system-ui, sans-serif;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 50;
+    opacity: .32; mix-blend-mode: soft-light;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  body::after {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 49;
+    background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,.4) 100%);
+  }
+
+  /* ---------- Nav ---------- */
+  .nav {
+    position: sticky; top: 0; z-index: 40;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 18px clamp(16px, 4vw, 48px);
+    background: rgba(18, 2, 3, .82);
+    border-bottom: 1px solid var(--line);
+  }
+  .brand {
+    font-family: "Anton", Impact, sans-serif; font-size: 20px; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--devil); text-decoration: none;
+  }
+  .nav ul { list-style: none; display: flex; gap: clamp(14px, 3vw, 34px); }
+  .nav a.link {
+    font-size: 12px; letter-spacing: .28em; text-transform: uppercase;
+    color: var(--ash); text-decoration: none; opacity: .65; padding: 6px 0;
+    border-bottom: 1px solid transparent;
+  }
+  .nav a.link:hover { opacity: 1; }
+  .nav a.link[aria-current="page"] { opacity: 1; color: var(--ember); border-bottom-color: var(--devil); }
+
+  /* ---------- Layout ---------- */
+  main { position: relative; z-index: 1; max-width: 1040px; margin: 0 auto; padding: 0 16px 96px; }
+
+  .hero { text-align: center; padding: clamp(64px, 10vw, 120px) 0 clamp(40px, 6vw, 72px); }
+  .eyebrow { font-size: 12px; letter-spacing: .5em; text-transform: uppercase; opacity: .55; padding-left: .5em; }
+  .hero h1 {
+    font-family: "Anton", Impact, sans-serif; font-weight: 400; text-transform: uppercase;
+    font-size: clamp(64px, 14vw, 160px); line-height: .9; color: var(--ember);
+    margin: 14px 0 22px; text-shadow: 0 2px 0 rgba(0,0,0,.35), 0 10px 30px rgba(0,0,0,.6);
+  }
+  .lede {
+    font-family: "Cormorant Garamond", Georgia, serif; font-style: italic; font-weight: 500;
+    font-size: clamp(20px, 2.8vw, 28px); line-height: 1.4; max-width: 34ch; margin: 0 auto;
+  }
+  .lede em { color: var(--ember); font-weight: 600; }
+
+  /* ---------- Stats ---------- */
+  .stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    margin-bottom: clamp(20px, 3vw, 32px);
+  }
+  .stat { padding: 28px 12px; text-align: center; }
+  .stat + .stat { border-left: 1px solid var(--line); }
+  .stat b {
+    display: block; font-family: "Anton", Impact, sans-serif; font-weight: 400;
+    font-size: clamp(40px, 6vw, 64px); line-height: 1; color: var(--devil);
+  }
+  .stat span { display: block; margin-top: 10px; font-size: 11px; letter-spacing: .26em; text-transform: uppercase; opacity: .6; }
+
+  /* ---------- Sections ---------- */
+  .block {
+    display: grid; grid-template-columns: 220px 1fr; gap: clamp(20px, 4vw, 56px);
+    padding: clamp(36px, 5vw, 56px) 0; border-top: 1px solid var(--line);
+  }
+  .block h2 {
+    font-family: "Anton", Impact, sans-serif; font-weight: 400; text-transform: uppercase;
+    font-size: clamp(28px, 3.4vw, 38px); line-height: 1; color: var(--devil); letter-spacing: .02em;
+  }
+  .block h2 small { display: block; font-family: "Inter", sans-serif; font-size: 11px; letter-spacing: .3em; color: var(--ash); opacity: .5; margin-bottom: 10px; }
+  .block p { font-size: 16px; max-width: 62ch; }
+  .block p + p { margin-top: 14px; }
+  .block strong { color: #e2c9c6; font-weight: 600; }
+
+  .quote {
+    text-align: center; padding: clamp(56px, 8vw, 96px) 0;
+    border-top: 1px solid var(--line);
+    font-family: "Cormorant Garamond", Georgia, serif; font-style: italic;
+    font-size: clamp(26px, 4vw, 44px); line-height: 1.25; color: var(--ash);
+  }
+  .quote span { color: var(--ember); }
+
+  .cta {
+    display: flex; justify-content: center;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 14px;
+    padding: 16px 30px; background: var(--devil); color: #1a0304;
+    font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase;
+    text-decoration: none; border-radius: 2px;
+  }
+  .btn:hover { background: var(--ember); }
+
+  footer { position: relative; z-index: 1; text-align: center; padding: 28px 16px 40px; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; opacity: .4; }
+
+  @media (max-width: 720px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(3) { border-left: 0; }
+    .stat:nth-child(n+3) { border-top: 1px solid var(--line); }
+    .block { grid-template-columns: 1fr; }
+    .nav { flex-direction: column; gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="brand" href="manchester-is-red.html">Manchester Is Red</a>
+  <ul>
+    <li><a class="link" href="manchester-is-red.html">Home</a></li>
+    <li><a class="link" href="about.html" aria-current="page">About</a></li>
+    <li><a class="link" href="history.html">History</a></li>
+  </ul>
+</nav>
+
+<main>
+  <header class="hero">
+    <p class="eyebrow">The red half of the city</p>
+    <h1>About</h1>
+    <p class="lede">A club born on the railway, rebuilt from tragedy, and <em>red</em> in every era since.</p>
+  </header>
+
+  <section class="stats" aria-label="Club honours at a glance">
+    <div class="stat"><b>1878</b><span>Founded</span></div>
+    <div class="stat"><b>20</b><span>League titles</span></div>
+    <div class="stat"><b>13</b><span>FA Cups</span></div>
+    <div class="stat"><b>3</b><span>European Cups</span></div>
+  </section>
+
+  <section class="block">
+    <h2><small>01</small>Where it began</h2>
+    <div>
+      <p>Manchester United started life in <strong>1878</strong> as Newton Heath LYR, a works team formed by men of the Lancashire and Yorkshire Railway. They played in green and gold on a rough pitch beside the carriage works.</p>
+      <p>By <strong>1902</strong> the club was nearly bankrupt. A group of local businessmen led by brewer John Henry Davies stepped in to save it, and the club took a new name: <strong>Manchester United</strong>. The shirts turned red soon after, and they have stayed red ever since.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2><small>02</small>Theatre of Dreams</h2>
+    <div>
+      <p><strong>Old Trafford</strong> has been home since 1910. It was bombed in 1941 and rebuilt after the war. Today it holds around 74,000 people, which makes it the largest club stadium in England.</p>
+      <p>Sir Bobby Charlton called it the <strong>Theatre of Dreams</strong>, and the name stuck.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2><small>03</small>Why the devil</h2>
+    <div>
+      <p>In the 1960s Sir Matt Busby took the nickname <strong>Red Devils</strong> from Salford's rugby league side, which had earned it on a tour of France. He wanted a name with more bite than "the Busby Babes," a name that carried painful memories after Munich.</p>
+      <p>It fit. The club became fearless, attacking and hard to kill.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2><small>04</small>The red half</h2>
+    <div>
+      <p>Manchester has two colours. The derby with City is more than a century old, and it splits streets, pubs and families across the city.</p>
+      <p>This page takes a side. <strong>Manchester is Red.</strong></p>
+    </div>
+  </section>
+
+  <p class="quote">"Football, <span>bloody hell.</span>"<br><small style="font-size:.4em;letter-spacing:.2em;font-style:normal;font-family:Inter,sans-serif;text-transform:uppercase;opacity:.55">— Sir Alex Ferguson, Barcelona, 1999</small></p>
+
+  <div class="cta"><a class="btn" href="history.html">Walk the history &rarr;</a></div>
+</main>
+
+<footer>An unofficial fan page</footer>
+
+</body>
+</html>

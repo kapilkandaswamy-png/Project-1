@@ -13,7 +13,7 @@
     --oxblood: #2a0507;
     --blood: #5c0a0e;
     --devil: #b3121b;
-    --ember: #d9261f;
+    --ember: #c01a1f;
     --ash: #c9a9a6;
     --soot: rgba(0, 0, 0, .55);
   }
@@ -56,6 +56,39 @@
     background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,.75) 100%);
   }
 
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 10;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 18px clamp(16px, 4vw, 48px);
+    border-bottom: 1px solid rgba(179, 18, 27, .35);
+    background: rgba(18, 2, 3, .6);
+  }
+  .brand {
+    font-family: "Anton", Impact, sans-serif; font-size: 20px; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--devil); text-decoration: none;
+  }
+  .nav ul { list-style: none; display: flex; gap: clamp(14px, 3vw, 34px); }
+  .nav a.link {
+    font-family: "Inter", sans-serif; font-size: 12px; letter-spacing: .28em; text-transform: uppercase;
+    color: var(--ash); text-decoration: none; opacity: .65; padding: 6px 0;
+    border-bottom: 1px solid transparent;
+  }
+  .nav a.link:hover { opacity: 1; }
+  .nav a.link[aria-current="page"] { opacity: 1; color: var(--ember); border-bottom-color: var(--devil); }
+  @media (max-width: 600px) { .nav { flex-direction: column; gap: 10px; } main { padding-top: 130px; } }
+
+  .enter {
+    display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+    margin-top: clamp(30px, 5vw, 48px);
+  }
+  .enter a {
+    padding: 14px 26px; font-size: 12px; font-weight: 600; letter-spacing: .3em;
+    text-transform: uppercase; text-decoration: none; border-radius: 2px;
+    color: var(--ash); border: 1px solid rgba(179, 18, 27, .45);
+  }
+  .enter a:first-child { background: var(--devil); color: #1a0304; border-color: var(--devil); }
+  .enter a:hover { background: var(--ember); color: #1a0304; border-color: var(--ember); }
+
   .embers {
     position: fixed;
     inset: 0;
@@ -69,14 +102,13 @@
     width: 3px;
     height: 3px;
     border-radius: 50%;
-    background: var(--ember);
+    background: var(--blood);
     opacity: 0;
-    filter: blur(.4px);
     animation: rise linear infinite;
   }
   @keyframes rise {
     0%   { transform: translate(0, 0); opacity: 0; }
-    15%  { opacity: .7; }
+    15%  { opacity: .5; }
     100% { transform: translate(var(--drift), -105vh); opacity: 0; }
   }
 
@@ -163,32 +195,21 @@
     color: var(--ember);
   }
 
-  .finish {
-    margin-top: clamp(26px, 4vw, 44px);
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 11px;
-    letter-spacing: .42em;
-    text-transform: uppercase;
-    color: var(--ash);
-    opacity: .5;
-    padding-left: .42em;
-  }
-  .finish::before, .finish::after {
-    content: "";
-    width: 26px;
-    height: 1px;
-    background: currentColor;
-  }
-
   @media (prefers-reduced-motion: reduce) {
     .embers { display: none; }
-    h1 .red { animation: none; }
   }
 </style>
 </head>
 <body>
+
+  <nav class="nav">
+    <a class="brand" href="manchester-is-red.html">Manchester Is Red</a>
+    <ul>
+      <li><a class="link" href="manchester-is-red.html" aria-current="page">Home</a></li>
+      <li><a class="link" href="about.html">About</a></li>
+      <li><a class="link" href="history.html">History</a></li>
+    </ul>
+  </nav>
 
   <div class="embers" aria-hidden="true"></div>
 
@@ -213,9 +234,27 @@
       Born in <em>red</em>, forged in fire —<br>
       and red to the bone.
     </p>
+
+    <div class="enter">
+      <a href="about.html">About</a>
+      <a href="history.html">History</a>
+    </div>
   </main>
 
 <script>
+  // Keep the headline on screen even if the web font doesn't load
+  function fitTitle() {
+    var el = document.querySelector('h1 .city');
+    el.style.fontSize = '';
+    var max = document.querySelector('main').clientWidth - 32;
+    var w = el.scrollWidth, fs = parseFloat(getComputedStyle(el).fontSize);
+    el.style.whiteSpace = 'nowrap';
+    w = el.scrollWidth;
+    if (w > max) el.style.fontSize = (fs * max / w) + 'px';
+  }
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(fitTitle);
+  window.addEventListener('resize', fitTitle);
+
   (function () {
     var box = document.querySelector('.embers');
     var n = window.innerWidth < 600 ? 22 : 45;
